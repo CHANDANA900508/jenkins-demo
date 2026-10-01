@@ -28,21 +28,11 @@ pipeline {
             }
         }
 
-        stage('Dependencies') {
+        stage('Build Docker Image') {
             steps {
-                bat 'npm install'
-            }
-        }
-
-        stage('Test APP') {
-            steps {
-                bat 'npm test'
-            }
-        }
-
-        stage('Build') {
-            steps {
-                bat 'docker build -t %IMAGE_NAME%:%BUILD_NUMBER% .'
+                dir('JenkinsFileDemo') {
+                    bat 'docker build -t %IMAGE_NAME%:%BUILD_NUMBER% .'
+                }
             }
         }
 
@@ -64,3 +54,4 @@ pipeline {
         }
     }
 }
+
